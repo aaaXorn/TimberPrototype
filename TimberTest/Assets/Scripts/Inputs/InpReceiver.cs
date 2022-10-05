@@ -6,6 +6,8 @@ namespace Inputs
 {
     public class InpReceiver : MonoBehaviour
     {
+        public bool isControlled;
+
         public float h_move;
         public float v_move;
         public bool jump;

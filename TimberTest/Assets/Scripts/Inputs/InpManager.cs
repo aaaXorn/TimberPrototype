@@ -43,6 +43,7 @@ namespace Inputs
                 #endif
 
                 _char = TimberInstance.Instance.timberInput;
+                _char.isControlled = true;
             }
         }
     }

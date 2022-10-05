@@ -356,6 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 937398841}
   - component: {fileID: 937398842}
+  - component: {fileID: 937398843}
   m_Layer: 7
   m_Name: Ledge
   m_TagString: Untagged
@@ -371,7 +372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937398840}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.487, z: 0}
+  m_LocalPosition: {x: 0, y: 0.463, z: 0}
   m_LocalScale: {x: 1, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 894084172}
@@ -388,8 +389,25 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.25, y: 0.25, z: 1.25}
+  m_Size: {x: 1.25, y: 0.5, z: 1.25}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &937398843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937398840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc83e60ddb9bfe40aa2f1383b078ff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start_pos: {x: 0, y: -0.25, z: 0}
+  end_pos: {x: 0, y: 0.25, z: 0}
+  start_dist: 0.75
+  end_dist: 0.1
+  jump_f: 200
 --- !u!1 &1441367829
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +421,7 @@ GameObject:
   - component: {fileID: 1441367835}
   - component: {fileID: 1441367832}
   - component: {fileID: 1441367834}
+  - component: {fileID: 1441367838}
   - component: {fileID: 1441367830}
   - component: {fileID: 1441367837}
   - component: {fileID: 1441367836}
@@ -454,6 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbcc6900e7f5e846b562475355a5ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isControlled: 0
   h_move: 0
   v_move: 0
   jump: 0
@@ -530,6 +550,22 @@ CapsuleCollider:
   m_Height: 0
   m_Direction: 1
   m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &1441367838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441367829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b7cf4b287cfb24eb02f66c42c3e9bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ledge_rc_offset: {x: 0, y: 1.5, z: 0.25}
+  _ledge_rc_dist: 1
+  _ledge_start_spd: 2.5
+  _ledge_climb_spd: 5
 --- !u!1 &1561936601
 GameObject:
   m_ObjectHideFlags: 0

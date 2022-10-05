@@ -6,10 +6,25 @@ using Actions;
 
 namespace Timber
 {
+    [RequireComponent(typeof(InpReceiver))]
+    [RequireComponent(typeof(Movement))]
+    [RequireComponent(typeof(LedgeGrab))]
     public class TimberControl : MonoBehaviour
     {
+        //character's states
+        enum State
+        {
+            Move,
+            Ledge
+        }
+        //current state
+        State currState = State.Move;
+
         InpReceiver _input;
         Movement _move;
+        LedgeGrab _ledge;
+
+        Rigidbody _rigid;
 
         bool _jump_tapped, _holding_jump;
 
@@ -17,15 +32,21 @@ namespace Timber
         {
             _input = GetComponent<InpReceiver>();
             _move = GetComponent<Movement>();
+            _ledge = GetComponent<LedgeGrab>();
+
+            _rigid = GetComponent<Rigidbody>();
         }
 
         void Update()
         {
-            Move();
-            Jump();
+            if(_input.isControlled == false) return;
+
+            StateMachine(currState);
         }
 
-        void Move()
+        #region movement
+        #region basic movement
+        private void Move()
         {
             //sets the direction based on the player's input
             Vector3 dir = new Vector3(_input.h_move, 0, _input.v_move).normalized;
@@ -33,7 +54,7 @@ namespace Timber
             _move.Rotate(dir, Time.deltaTime);
         }
 
-        void Jump()
+        private void Jump()
         {
             if(_input.jump)
             {
@@ -73,6 +94,50 @@ namespace Timber
                 }
             }
         }
+        #endregion
+
+        private void LedgeCheck()
+        {
+            if(_rigid.velocity.y < -0.1f)
+            {
+                if(_ledge.LedgeCheck())
+                {
+                    currState = State.Ledge;
+                }
+            }
+        }
+        #endregion
+
+        #region state machine
+
+        private void StateMachine(State state)
+        {
+            switch(state)
+            {
+                case State.Move:
+                    MoveState();
+                    break;
+                
+                case State.Ledge:
+                    LedgeState();
+                    break;
+            }
+        }
+
+        private void MoveState()
+        {
+            Move();
+            Jump();
+            
+            LedgeCheck();
+        }
+
+        private void LedgeState()
+        {
+            if(_ledge.Ledge(Time.deltaTime) == true)
+                currState = State.Move;
+        }
+        #endregion
 
         void FixedUpdate()
         {

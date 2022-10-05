@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Actions
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class Movement : MonoBehaviour
     {
         [Tooltip("Movement stats.")]
@@ -25,23 +26,27 @@ namespace Actions
         //jump raycast layermask
         LayerMask _jump_rc_layers;
 
+        //if the jump started while the character was grounded
         bool _grounded;
+        //how many air jumps the character can still make
         int _curr_air_jumps;
+        //the current timer of hold jump
         float _curr_jump_charge;
+        //if jump is currently in cooldown
         bool _jump_isCD;
 
         void Awake()
         {
             _rigid = GetComponent<Rigidbody>();
-
-            //layer 3 is the layer Player, layer 6 is the layer Character
-            //this sets the layer mask as everything but those two layers
-            _jump_rc_layers = ~((1 << 3) | (1 << 6));
         }
 
         void Start()
         {
             _curr_air_jumps = _so_move.air_jumps;
+
+            //layer 3 is the layer Player, layer 6 is the layer Character
+            //this sets the layer mask as everything but those two layers
+            _jump_rc_layers = ~((1 << 3) | (1 << 6));
         }
 
         //changes the character's horizontal velocity
@@ -63,13 +68,16 @@ namespace Actions
         }
 
         #region jump
+        //checks if the player is grounded
         public bool JumpCheck()
         {
             if(isStunned) return false;
 
+            //raycast variables
             Ray ray = new Ray(transform.position + _jump_rc_offset, -Vector3.up);
             RaycastHit hit;
 
+            //checks if there's a valid collider below the character
             if(Physics.Raycast(ray, out hit, _jump_rc_dist, _jump_rc_layers))
                 return true;
             return false;
@@ -87,7 +95,7 @@ namespace Actions
         {
             _rigid.AddForce(Vector3.up * (grounded ? _so_move.jump_f : _so_move.air_jump_f));
         }
-        //!!!used in FixedUpdate()
+        //!!!used in a coroutine with yield return new WaitForFixedUpdate()
         private void HoldJump(bool grounded)
         {
             _rigid.AddForce(Vector3.up * (grounded ? _so_move.h_jump_f : _so_move.h_air_jump_f));
@@ -162,6 +170,7 @@ namespace Actions
         }
 
         //!!!used in FixedUpdate()
+        //set Rigidbody Use Gravity as false in the inspector, as this will be used instead
         public void Gravity()
         {
             _rigid.AddForce(-Vector3.up * _so_move.grav);
