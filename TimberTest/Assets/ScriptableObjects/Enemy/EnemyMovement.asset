@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8349b44c255911b488beb17bfbe131d9, type: 3}
-  m_Name: PlayerMovement
+  m_Name: EnemyMovement
   m_EditorClassIdentifier: 
   move_spd: 5
-  jump_f: 250
+  jump_f: 200
   h_jump_f: 10
   air_jump_f: 200
   h_air_jump_f: 5
-  air_jumps: 0
+  air_jumps: 3
   max_jump_charge: 0.25
   air_max_jump_charge: 0.25
   jump_cd: 0.2
-  grav: 9.81
+  grav: 5
   rot_spd: 400
   stun_duration: 0

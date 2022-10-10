@@ -128,6 +128,11 @@ namespace Timber
         {
             Move();
             Jump();
+
+            /*if(_input.action1)
+            {
+                print("test");
+            }*/
             
             LedgeCheck();
         }

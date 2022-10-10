@@ -8,6 +8,8 @@ namespace Inputs
 {
     public class InpManager : MonoBehaviour
     {
+        public static InpManager Instance {get; private set;}
+
         //rewired player
         Player _rw_player;
         //which object is receiving the inputs
@@ -15,6 +17,11 @@ namespace Inputs
 
         void Awake()
         {
+            //sets global reference
+            if (Instance == null) Instance = this;
+            //if there's  already an instance, remove this
+            else Destroy(gameObject);
+
             _rw_player = ReInput.players.GetPlayer(0);
         }
 
@@ -45,6 +52,14 @@ namespace Inputs
                 _char = TimberInstance.Instance.timberInput;
                 _char.isControlled = true;
             }
+        }
+
+        public void ChangeReceiver(InpReceiver inp)
+        {
+            _char.isControlled = false;
+
+            _char = inp;
+            _char.isControlled = true;
         }
     }
 }
