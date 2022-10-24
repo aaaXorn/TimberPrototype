@@ -49,14 +49,14 @@ namespace Actions
             _jump_rc_layers = ~((1 << 3) | (1 << 6));
         }
 
+        #region basic movement
         //changes the character's horizontal velocity
         public void Move(Vector3 dir)
         {
             if(isStunned) return;
 
-            _rigid.velocity = new Vector3(dir.x * _so_move.move_spd, _rigid.velocity.y, dir.z * _so_move.move_spd);
+            //_rigid.velocity = new Vector3(dir.x * _so_move.move_spd, _rigid.velocity.y, dir.z * _so_move.move_spd);
         }
-        
         public void Rotate(Vector3 dir, float time)
         {
             if(isStunned || dir.magnitude < 0.1f) return;
@@ -66,6 +66,7 @@ namespace Actions
 			//rotates until the target rotation is reached
 			transform.rotation = Quaternion.RotateTowards(transform.rotation, newRot, _so_move.rot_spd * time);
         }
+        #endregion
 
         #region jump
         //checks if the player is grounded
@@ -174,6 +175,11 @@ namespace Actions
         public void Gravity()
         {
             _rigid.AddForce(-Vector3.up * _so_move.grav);
+        }
+
+        public bool Get_isStunned()
+        {
+            return isStunned;
         }
     }
 }

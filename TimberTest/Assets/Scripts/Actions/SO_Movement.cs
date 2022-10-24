@@ -35,7 +35,7 @@ public class SO_Movement : ScriptableObject
 
     [Tooltip("Rotation speed.")]
     public float rot_spd;
-
+    
     [Tooltip("Stun effect duration.")]
     public float stun_duration;
 }

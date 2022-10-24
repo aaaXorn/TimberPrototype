@@ -57,6 +57,7 @@ namespace Enemy
             Vector3 dir = new Vector3(_input.h_move, 0, _input.v_move).normalized;
             _move.Move(dir);
             _move.Rotate(dir, Time.deltaTime);
+            Dash(dir);
         }
 
         private void Jump()
@@ -109,6 +110,17 @@ namespace Enemy
                 {
                     currState = State.Ledge;
                 }
+            }
+        }
+
+        public void Dash(Vector3 dir)
+        {
+            if(_input.action2)
+            {
+                print("dash");
+                _dash.DashEffect(dir);
+
+                _jump_tapped = true;
             }
         }
         #endregion
