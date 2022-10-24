@@ -51,11 +51,11 @@ namespace Enemy
 
         #region movement
         #region basic movement
-        private void Move()
+        private void Move(float time)
         {
             //sets the direction based on the player's input
             Vector3 dir = new Vector3(_input.h_move, 0, _input.v_move).normalized;
-            _move.Move(dir);
+            _move.Move(dir, time);
             _move.Rotate(dir, Time.deltaTime);
             Dash(dir);
         }
@@ -143,7 +143,7 @@ namespace Enemy
 
         private void MoveState()
         {
-            Move();
+            Move(Time.deltaTime);
             Jump();
             
             LedgeCheck();

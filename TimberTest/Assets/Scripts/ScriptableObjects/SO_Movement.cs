@@ -8,6 +8,10 @@ public class SO_Movement : ScriptableObject
 {
     [Tooltip("Horizontal movement speed.")]
     public float move_spd;
+    [Tooltip("Horizontal move force.")]
+    public float move_f;
+    [Tooltip("Horizontal force ForceMode.")]
+    public ForceMode move_f_mode;
 
     #region Jump
     [Tooltip("Ground jump initial force.")]
@@ -25,6 +29,9 @@ public class SO_Movement : ScriptableObject
     public float max_jump_charge;
     [Tooltip("Maximum time-window for air hold jump.")]
     public float air_max_jump_charge;
+
+    [Tooltip("Jump force ForceMode.")]
+    public ForceMode jump_f_mode;
 
     [Tooltip("Minimum time between jumps.")]
     public float jump_cd;

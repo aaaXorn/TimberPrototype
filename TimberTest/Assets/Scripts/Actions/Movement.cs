@@ -51,11 +51,23 @@ namespace Actions
 
         #region basic movement
         //changes the character's horizontal velocity
-        public void Move(Vector3 dir)
+        public void Move(Vector3 dir, float time)
         {
-            if(isStunned) return;
-
+            if(isStunned || dir == Vector3.zero) return;
+//https://www.youtube.com/watch?v=BNiAt0HnC5M
             //_rigid.velocity = new Vector3(dir.x * _so_move.move_spd, _rigid.velocity.y, dir.z * _so_move.move_spd);
+            Vector3 vel = dir * _so_move.move_spd;
+            vel += vel.normalized * 0.2f * _rigid.drag;
+
+            float force = Mathf.Clamp(_so_move.move_f, -_rigid.mass / time, _rigid.mass / time);
+
+            if(_rigid.velocity.magnitude == 0)
+                _rigid.AddForce(vel * force, _so_move.move_f_mode);
+            else
+            {
+                var velProjectedToTarget = (vel.normalized * Vector3.Dot(vel, _rigid.velocity) / vel.magnitude);
+                _rigid.AddForce((vel - velProjectedToTarget) * force, _so_move.move_f_mode);
+            }
         }
         public void Rotate(Vector3 dir, float time)
         {
@@ -99,7 +111,7 @@ namespace Actions
         //!!!used in a coroutine with yield return new WaitForFixedUpdate()
         private void HoldJump(bool grounded)
         {
-            _rigid.AddForce(Vector3.up * (grounded ? _so_move.h_jump_f : _so_move.h_air_jump_f));
+            _rigid.AddForce(Vector3.up * (grounded ? _so_move.h_jump_f : _so_move.h_air_jump_f), _so_move.jump_f_mode);
         }
         
         public void Jump()

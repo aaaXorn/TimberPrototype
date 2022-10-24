@@ -46,12 +46,14 @@ namespace Timber
 
         #region movement
         #region basic movement
-        private void Move()
+        private void Move(float time)
         {
             //sets the direction based on the player's input
             Vector3 dir = new Vector3(_input.h_move, 0, _input.v_move).normalized;
-            _move.Move(dir);
+            _move.Move(dir, time);
             _move.Rotate(dir, Time.deltaTime);
+
+            if(dir == Vector3.zero) print(_rigid.velocity.magnitude);
         }
 
         private void Jump()
@@ -126,7 +128,7 @@ namespace Timber
 
         private void MoveState()
         {
-            Move();
+            Move(Time.deltaTime);
             Jump();
 
             /*if(_input.action1)
