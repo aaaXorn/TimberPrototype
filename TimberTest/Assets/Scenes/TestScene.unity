@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -552,6 +552,7 @@ GameObject:
   - component: {fileID: 1441367830}
   - component: {fileID: 1441367837}
   - component: {fileID: 1441367836}
+  - component: {fileID: 1441367839}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -693,6 +694,20 @@ MonoBehaviour:
   _ledge_rc_dist: 1
   _ledge_start_spd: 2.5
   _ledge_climb_spd: 5
+--- !u!114 &1441367839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441367829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22efbd9ae5cc9a848a074b79e439176e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dragMult: 3
+  _dragDir: {x: 1, y: 0, z: 1}
 --- !u!1 &1454894597
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,6 +725,7 @@ GameObject:
   - component: {fileID: 1454894600}
   - component: {fileID: 1454894599}
   - component: {fileID: 1454894598}
+  - component: {fileID: 1454894607}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -852,6 +868,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1454894607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454894597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22efbd9ae5cc9a848a074b79e439176e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dragMult: 2
+  _dragDir: {x: 0, y: 1, z: 0}
 --- !u!1 &1555022763
 GameObject:
   m_ObjectHideFlags: 0

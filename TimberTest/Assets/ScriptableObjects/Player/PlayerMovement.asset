@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8349b44c255911b488beb17bfbe131d9, type: 3}
   m_Name: PlayerMovement
   m_EditorClassIdentifier: 
-  move_spd: 20
+  move_spd: 25
   move_f: 0.1
   move_f_mode: 0
   jump_f: 250

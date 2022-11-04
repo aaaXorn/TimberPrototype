@@ -15,15 +15,15 @@ MonoBehaviour:
   move_spd: 10
   move_f: 0.1
   move_f_mode: 0
-  jump_f: 200
+  jump_f: 350
   h_jump_f: 10
-  air_jump_f: 200
+  air_jump_f: 300
   h_air_jump_f: 5
   air_jumps: 3
   max_jump_charge: 0.25
   air_max_jump_charge: 0.25
   jump_f_mode: 0
   jump_cd: 0.2
-  grav: 5
+  grav: 7.5
   rot_spd: 400
   stun_duration: 0
